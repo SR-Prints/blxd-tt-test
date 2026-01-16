@@ -1,46 +1,52 @@
+/* Reset */
 * { box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
 body { margin: 0; background: #0b0e14; color: #e5e7eb; }
-.container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-h1 { text-align: center; font-size: 28px; margin-bottom: 5px; }
+
+/* Container */
+.container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+h1 { text-align: center; font-size: 32px; margin-bottom: 5px; }
 .subtitle { text-align: center; color: #9ca3af; margin-bottom: 20px; }
 
 /* Tabs */
 .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.tab { padding: 8px 14px; background: #020617; border: 1px solid #1e293b; color: #9ca3af; border-radius: 6px; cursor: pointer; transition: 0.2s; }
-.tab.active { background: #0f172a; color: white; border-color: #334155; }
-.tab:hover { color: white; }
+.tab { padding: 10px 16px; background: #020617; border: 1px solid #1e293b; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.2s; }
+.tab.active { background: #0f172a; color: #fff; border-color: #334155; }
+.tab:hover { color: #fff; }
 
-/* Search input */
-input { display: block; margin: 0 auto 20px; padding: 8px 10px; width: 100%; max-width: 300px; background: #111827; border: 1px solid #1f2937; color: white; border-radius: 6px; }
+/* Search */
+input { display: block; margin: 0 auto 20px; padding: 10px 12px; width: 100%; max-width: 320px; background: #111827; border: 1px solid #1f2937; color: #fff; border-radius: 6px; }
 
 /* Table */
 .table-wrapper { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; overflow: hidden; }
 table { width: 100%; border-collapse: collapse; }
 thead { background: #020617; }
-th { padding: 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
-td { padding: 12px; border-top: 1px solid #1e293b; }
+th { padding: 14px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
+td { padding: 14px; border-top: 1px solid #1e293b; vertical-align: middle; }
 tbody tr:hover { background: #020617; }
 
-/* Rank badges */
+/* Rank badges with gradient style */
 .badge {
   display: inline-block;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 12px;
   font-weight: bold;
   color: white;
   margin-right: 4px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
-.badge-LT5 { background: #6b7280; }
-.badge-LT4 { background: #9ca3af; }
-.badge-LT3 { background: #3b82f6; }
-.badge-LT2 { background: #10b981; }
-.badge-LT1 { background: #facc15; }
-.badge-HT5 { background: #f97316; }
-.badge-HT4 { background: #ef4444; }
-.badge-HT3 { background: #d946ef; }
-.badge-HT2 { background: #8b5cf6; }
-.badge-HT1 { background: #14b8a6; }
 
-/* Points cell bold */
+/* Rank gradient colors */
+.badge-LT5 { background: linear-gradient(45deg, #6b7280, #4b5563); }
+.badge-HT5 { background: linear-gradient(45deg, #f97316, #ea580c); }
+.badge-LT4 { background: linear-gradient(45deg, #9ca3af, #6b7280); }
+.badge-HT4 { background: linear-gradient(45deg, #ef4444, #dc2626); }
+.badge-LT3 { background: linear-gradient(45deg, #3b82f6, #2563eb); }
+.badge-HT3 { background: linear-gradient(45deg, #d946ef, #9333ea); }
+.badge-LT2 { background: linear-gradient(45deg, #10b981, #047857); }
+.badge-HT2 { background: linear-gradient(45deg, #8b5cf6, #5b21b6); }
+.badge-LT1 { background: linear-gradient(45deg, #facc15, #eab308); }
+.badge-HT1 { background: linear-gradient(45deg, #14b8a6, #0d9488); }
+
+/* Points bold */
 td:last-child { font-weight: bold; }
