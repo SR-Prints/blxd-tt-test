@@ -1,6 +1,14 @@
-[
-  { "player": "Syphor", "tier": "LT3" },
-  { "player": "PvP_Master", "tier": "A" },
-  { "player": "SharpBlade", "tier": "A" },
-  { "player": "VoidHunter", "tier": "B" }
-]
+{
+  "uhc": [
+    { "player": "BloxdKing", "tier": "S" },
+    { "player": "SharpBlade", "tier": "A" }
+  ],
+  "sword": [
+    { "player": "PvP_Master", "tier": "S" },
+    { "player": "VoidHunter", "tier": "B" }
+  ],
+  "pot": [
+    { "player": "NightPvPer", "tier": "A" },
+    { "player": "BloxdKing", "tier": "B" }
+  ]
+}
