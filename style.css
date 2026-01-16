@@ -1,8 +1,6 @@
-/* Reset */
 * { box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
 body { margin: 0; background: #0b0e14; color: #e5e7eb; }
 
-/* Container */
 .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 h1 { text-align: center; font-size: 32px; margin-bottom: 5px; }
 .subtitle { text-align: center; color: #9ca3af; margin-bottom: 20px; }
@@ -16,27 +14,25 @@ h1 { text-align: center; font-size: 32px; margin-bottom: 5px; }
 /* Search */
 input { display: block; margin: 0 auto 20px; padding: 10px 12px; width: 100%; max-width: 320px; background: #111827; border: 1px solid #1f2937; color: #fff; border-radius: 6px; }
 
+/* Table wrapper */
+.table-wrapper { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; }
+
 /* Table */
-.table-wrapper { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; overflow: hidden; }
-table { width: 100%; border-collapse: collapse; }
-thead { background: #020617; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; }
+thead { background: #020617; border-bottom: 2px solid #334155; }
 th { padding: 14px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
-td { padding: 14px; border-top: 1px solid #1e293b; vertical-align: middle; }
-tbody tr:hover { background: #020617; }
+td { padding: 14px; border-top: 1px solid #1e293b; vertical-align: middle; transition: background 0.3s; border-radius: 8px; }
 
-/* Rank badges with gradient style */
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-  margin-right: 4px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
+/* Row highlight for top 3 */
+tbody tr:nth-child(1) td { background: linear-gradient(90deg,#facc15,#f59e0b); color: #0b0e14; font-weight: bold; }
+tbody tr:nth-child(2) td { background: linear-gradient(90deg,#10b981,#047857); color: #fff; font-weight: bold; }
+tbody tr:nth-child(3) td { background: linear-gradient(90deg,#3b82f6,#1e40af); color: #fff; font-weight: bold; }
 
-/* Rank gradient colors */
+/* Hover animation */
+tbody tr:hover td { background: #020617; }
+
+/* Badges */
+.badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; color: white; margin-right: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 .badge-LT5 { background: linear-gradient(45deg, #6b7280, #4b5563); }
 .badge-HT5 { background: linear-gradient(45deg, #f97316, #ea580c); }
 .badge-LT4 { background: linear-gradient(45deg, #9ca3af, #6b7280); }
@@ -50,3 +46,10 @@ tbody tr:hover { background: #020617; }
 
 /* Points bold */
 td:last-child { font-weight: bold; }
+
+/* Modal */
+.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.75); }
+.modal-content { background-color: #0f172a; margin: 10% auto; padding: 20px; border: 1px solid #334155; width: 90%; max-width: 400px; border-radius: 12px; color: #e5e7eb; animation: fadeIn 0.3s ease; }
+.close { color: #9ca3af; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+.close:hover { color: #fff; }
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
