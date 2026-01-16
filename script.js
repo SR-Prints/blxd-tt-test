@@ -3,11 +3,12 @@ let currentMode = "overall";
 
 // Rank points
 const rankPoints = {
-  "LT5": 10, "LT4": 20, "LT3": 30, "LT2": 40, "LT1": 50,
-  "HT5": 60, "HT4": 70, "HT3": 80, "HT2": 90, "HT1": 100
+  "LT5": 10, "HT5": 20, "LT4": 30, "HT4": 40,
+  "LT3": 50, "HT3": 60, "LT2": 70, "HT2": 80,
+  "LT1": 90, "HT1": 100
 };
 
-// Function to fetch the latest data with cache-busting
+// Fetch data with cache-busting
 function fetchData() {
   fetch("data.json?t=" + new Date().getTime())
     .then(res => res.json())
@@ -18,7 +19,7 @@ function fetchData() {
     .catch(err => console.error("Error loading data.json:", err));
 }
 
-// Render table
+// Render leaderboard
 function render() {
   const tbody = document.getElementById("rows");
   const search = document.getElementById("search").value.toLowerCase();
@@ -45,7 +46,6 @@ function render() {
     }));
   }
 
-  // Filter by search and render
   list.filter(p => p.player.toLowerCase().includes(search))
       .forEach((p,i) => {
         const tr = document.createElement("tr");
@@ -67,7 +67,7 @@ function render() {
       });
 }
 
-// Search input
+// Search
 document.getElementById("search").addEventListener("input", render);
 
 // Tab switching
