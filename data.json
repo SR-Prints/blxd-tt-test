@@ -1,11 +1,11 @@
 {
   "uhc": [
     { "player": "BloxdKing", "rank": "HT1" },
-    { "player": "SharpBlade", "rank": "HT3" }
+    { "player": "SharpBlade", "rank": "LT5" }
   ],
   "sword": [
     { "player": "PvP_Master", "rank": "HT2" },
-    { "player": "VoidHunter", "rank": "LT2" }
+    { "player": "VoidHunter", "rank": "LT3" }
   ],
   "pot": [
     { "player": "NightPvPer", "rank": "HT4" },
