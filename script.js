@@ -1,12 +1,18 @@
 let data = {};
 let currentMode = "overall";
 
-const tierPoints = { S: 4, A: 3, B: 2, C: 1 };
+// Rank points
+const rankPoints = {
+  "LT5": 10, "LT4": 20, "LT3": 30, "LT2": 40, "LT1": 50,
+  "HT5": 60, "HT4": 70, "HT3": 80, "HT2": 90, "HT1": 100
+};
 
+// Load JSON
 fetch("data.json")
   .then(res => res.json())
   .then(json => { data = json; render(); });
 
+// Render table
 function render() {
   const tbody = document.getElementById("rows");
   const search = document.getElementById("search").value.toLowerCase();
@@ -15,52 +21,49 @@ function render() {
   let list = [];
 
   if (currentMode === "overall") {
-    // Sum points across all modes
     const scores = {};
     for (const mode in data) {
       data[mode].forEach(p => {
         if (!scores[p.player]) scores[p.player] = { player: p.player, points: 0, badges: [] };
-        scores[p.player].points += tierPoints[p.tier] || 0;
-        scores[p.player].badges.push({ mode, tier: p.tier });
+        const pts = rankPoints[p.rank] || 0;
+        scores[p.player].points += pts;
+        scores[p.player].badges.push({ mode, rank: p.rank, points: pts });
       });
     }
     list = Object.values(scores).sort((a,b) => b.points - a.points);
   } else {
-    // Single mode
     list = (data[currentMode] || []).map(p => ({
       player: p.player,
-      tier: p.tier,
-      points: tierPoints[p.tier] || 0
+      rank: p.rank,
+      points: rankPoints[p.rank] || 0
     }));
   }
 
-  list
-    .filter(p => p.player.toLowerCase().includes(search))
-    .forEach((p, i) => {
-      const tr = document.createElement("tr");
-      let tierCell = "";
+  list.filter(p => p.player.toLowerCase().includes(search))
+      .forEach((p,i) => {
+        const tr = document.createElement("tr");
+        let rankCell = "";
 
-      if (currentMode === "overall") {
-        // show badges for overall
-        tierCell = p.badges.map(b => `<span class="badge badge-${b.tier}">${b.mode.toUpperCase()}: ${b.tier}</span>`).join(" ");
-      } else {
-        tierCell = `<span class="tier-${p.tier}">${p.tier}</span>`;
-      }
+        if (currentMode === "overall") {
+          rankCell = p.badges.map(b => `<span class="badge badge-${b.rank}">${b.mode.toUpperCase()}: ${b.rank}</span>`).join(" ");
+        } else {
+          rankCell = `<span class="badge badge-${p.rank}">${p.rank}</span>`;
+        }
 
-      tr.innerHTML = `
-        <td>${i+1}</td>
-        <td>${p.player}</td>
-        <td>${tierCell}</td>
-        <td>${p.points}</td>
-      `;
-      tbody.appendChild(tr);
-    });
+        tr.innerHTML = `
+          <td>${i+1}</td>
+          <td>${p.player}</td>
+          <td>${rankCell}</td>
+          <td>${p.points}</td>
+        `;
+        tbody.appendChild(tr);
+      });
 }
 
-// Search
+// Search input
 document.getElementById("search").addEventListener("input", render);
 
-// Tabs
+// Tab switching
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelector(".tab.active").classList.remove("active");
