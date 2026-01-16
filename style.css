@@ -1,80 +1,41 @@
-* {
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
+* { box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
+body { margin: 0; background: #0b0e14; color: #e5e7eb; }
+.container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+h1 { text-align: center; font-size: 28px; margin-bottom: 5px; }
+.subtitle { text-align: center; color: #9ca3af; margin-bottom: 20px; }
 
-body {
-  margin: 0;
-  background: #0b0e14;
-  color: #e5e7eb;
-}
+/* Tabs */
+.tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+.tab { padding: 8px 14px; background: #020617; border: 1px solid #1e293b; color: #9ca3af; border-radius: 6px; cursor: pointer; }
+.tab.active { background: #0f172a; color: white; border-color: #334155; }
+.tab:hover { color: white; }
 
-.container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
+input { display: block; margin: 0 auto 20px; padding: 8px 10px; width: 100%; max-width: 300px; background: #111827; border: 1px solid #1f2937; color: white; border-radius: 6px; }
 
-h1 {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 5px;
-}
-
-.subtitle {
-  text-align: center;
-  color: #9ca3af;
-  margin-bottom: 20px;
-}
-
-input {
-  display: block;
-  margin: 0 auto 20px;
-  padding: 8px 10px;
-  width: 100%;
-  max-width: 300px;
-  background: #111827;
-  border: 1px solid #1f2937;
-  color: white;
-  border-radius: 6px;
-}
-
-.table-wrapper {
-  background: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead {
-  background: #020617;
-}
-
-th {
-  padding: 12px;
-  text-align: left;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #9ca3af;
-}
-
-td {
-  padding: 12px;
-  border-top: 1px solid #1e293b;
-}
-
-tbody tr:hover {
-  background: #020617;
-}
+.table-wrapper { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; }
+thead { background: #020617; }
+th { padding: 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
+td { padding: 12px; border-top: 1px solid #1e293b; }
+tbody tr:hover { background: #020617; }
 
 /* Tier colors */
 .tier-S { color: #ef4444; font-weight: bold; }
 .tier-A { color: #f59e0b; font-weight: bold; }
 .tier-B { color: #3b82f6; font-weight: bold; }
 .tier-C { color: #9ca3af; font-weight: bold; }
+
+/* Badge style */
+.badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  margin-right: 4px;
+}
+.badge-S { background: #ef4444; }
+.badge-A { background: #f59e0b; }
+.badge-B { background: #3b82f6; }
+.badge-C { background: #9ca3af; }
