@@ -9,37 +9,47 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>Bloxd.io PvP Rankings</h1>
-    <p class="subtitle">Community PvP Leaderboard</p>
+<div class="container">
+  <h1>Bloxd.io PvP Rankings</h1>
+  <p class="subtitle">Community PvP Leaderboard</p>
 
-    <!-- Tabs -->
-    <div class="tabs">
-      <button class="tab active" data-mode="overall">Overall</button>
-      <button class="tab" data-mode="uhc">UHC</button>
-      <button class="tab" data-mode="sword">Sword</button>
-      <button class="tab" data-mode="pot">Pot</button>
-    </div>
-
-    <!-- Search -->
-    <input id="search" type="text" placeholder="Search player">
-
-    <!-- Table -->
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Player</th>
-            <th>Rank / Badges</th>
-            <th>Points</th>
-          </tr>
-        </thead>
-        <tbody id="rows"></tbody>
-      </table>
-    </div>
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" data-mode="overall">Overall</button>
+    <button class="tab" data-mode="uhc">UHC</button>
+    <button class="tab" data-mode="sword">Sword</button>
+    <button class="tab" data-mode="pot">Pot</button>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Search -->
+  <input id="search" type="text" placeholder="Search player">
+
+  <!-- Table -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Rank / Badges</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal for player info -->
+<div id="playerModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modalName"></h2>
+    <p id="modalDiscord"></p>
+    <p id="modalRanks"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
