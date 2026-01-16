@@ -7,10 +7,16 @@ const rankPoints = {
   "HT5": 60, "HT4": 70, "HT3": 80, "HT2": 90, "HT1": 100
 };
 
-// Load JSON
-fetch("data.json")
-  .then(res => res.json())
-  .then(json => { data = json; render(); });
+// Function to fetch the latest data with cache-busting
+function fetchData() {
+  fetch("data.json?t=" + new Date().getTime())
+    .then(res => res.json())
+    .then(json => {
+      data = json;
+      render();
+    })
+    .catch(err => console.error("Error loading data.json:", err));
+}
 
 // Render table
 function render() {
@@ -39,6 +45,7 @@ function render() {
     }));
   }
 
+  // Filter by search and render
   list.filter(p => p.player.toLowerCase().includes(search))
       .forEach((p,i) => {
         const tr = document.createElement("tr");
@@ -72,3 +79,9 @@ document.querySelectorAll(".tab").forEach(tab => {
     render();
   });
 });
+
+// Initial fetch
+fetchData();
+
+// Auto-refresh every 30 seconds
+setInterval(fetchData, 30000);
