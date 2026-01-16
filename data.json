@@ -1,14 +1,14 @@
 {
   "uhc": [
-    { "player": "BloxdKing", "rank": "HT1" },
+    { "player": "BloxdKing", "rank": "HT1", "discord": "123456789012345678" },
     { "player": "SharpBlade", "rank": "LT5" }
   ],
   "sword": [
-    { "player": "PvP_Master", "rank": "HT2" },
+    { "player": "PvP_Master", "rank": "HT2", "discord": "987654321098765432" },
     { "player": "VoidHunter", "rank": "LT3" }
   ],
   "pot": [
     { "player": "NightPvPer", "rank": "HT4" },
-    { "player": "BloxdKing", "rank": "HT3" }
+    { "player": "BloxdKing", "rank": "HT3", "discord": "123456789012345678" }
   ]
 }
