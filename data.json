@@ -3,27 +3,24 @@
   "leaderboard": [
     {
       "discordId": "123456",
-      "username": "PlayerOne",
+      "username": "Syphor",
       "uhc": "HT1",
-      "pot": "LT3",
-      "sword": "LT2",
-      "score": 0
+      "pot": "HT1",
+      "sword": "HT1"
     },
     {
       "discordId": "987654",
       "username": "PlayerTwo",
       "uhc": "LT1",
       "pot": "LT2",
-      "sword": "LT1",
-      "score": 0
+      "sword": "LT1"
     },
     {
       "discordId": "246810",
       "username": "PlayerThree",
       "uhc": "LT5",
       "pot": "LT4",
-      "sword": "LT3",
-      "score": 0
+      "sword": "LT3"
     }
   ]
 }
