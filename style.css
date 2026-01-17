@@ -70,21 +70,23 @@ body {
 }
 
 table { width:100%; border-collapse:collapse; }
-th, td { padding:0.75rem; text-align:center; transition: background 0.2s; }
+th, td { padding:0.75rem; text-align:center; transition: all 0.25s ease; }
 th { background:#22223a; border-bottom:2px solid #444; font-weight:600; }
-tbody tr { background:#1c1c2b; transition: all 0.3s ease; cursor:pointer; border-radius:8px; }
-tbody tr:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(88,101,242,0.5); background:#2a2a3c; }
+tbody tr { background:#1c1c2b; transition: all 0.3s ease, transform 0.2s ease; cursor:pointer; border-radius:8px; }
+tbody tr:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(88,101,242,0.6); background:#2a2a3c; }
 
 /* Badges */
 .badge {
   display:inline-block;
   padding:0.15rem 0.4rem;
   border-radius:4px;
-  font-size:0.7rem;
+  font-size:0.75rem;
   font-weight:bold;
   margin:0 0.15rem;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  cursor:default;
 }
+.badge:hover { transform:scale(1.1); }
 .ht1 { background:#ffd700; color:#111; }
 .lt1 { background:#c0c0c0; color:#111; }
 .lt2 { background:#cd7f32; color:#111; }
@@ -98,7 +100,7 @@ tbody tr:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(88,101,2
 .rank3 { background:#cd7f32; color:#111; }
 
 /* Highlight for search */
-tbody tr.highlight { box-shadow:0 0 15px rgba(88,101,242,0.8); transform:translateY(-2px); background:#2a2a3c; }
+tbody tr.highlight { box-shadow:0 0 15px rgba(88,101,242,0.9); transform:translateY(-3px); background:#2a2a3c; }
 
 /* Modal */
 #player-modal {
@@ -114,9 +116,17 @@ tbody tr.highlight { box-shadow:0 0 15px rgba(88,101,242,0.8); transform:transla
   background:#1c1c2b; padding:2rem; border-radius:12px;
   min-width:320px; max-width:500px;
   box-shadow:0 20px 60px rgba(0,0,0,0.6);
-  transform:scale(0.95); transition: transform 0.3s ease;
+  transform:scale(0.95); transition: transform 0.25s ease;
 }
 #player-modal.show .modal-content { transform:scale(1); }
 #close-modal { position:absolute; right:18px; top:14px; font-size:1.5rem; cursor:pointer; opacity:0.7; }
 #close-modal:hover { opacity:1; }
 .player-badges { display:flex; justify-content:space-around; margin:1rem 0; }
+
+/* Responsive table scroll for small screens */
+@media (max-width:800px){
+  table, thead, tbody, th, td, tr { display:block; }
+  thead tr { display:none; }
+  tbody tr { margin-bottom:1rem; }
+  td { display:flex; justify-content:space-between; padding:0.5rem; border-bottom:1px solid #444; }
+}
