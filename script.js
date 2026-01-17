@@ -1,4 +1,6 @@
 let currentTab = 'overall';
+let leaderboardData = [];
+let previousOrder = [];
 
 function getTierPoints(tier){
   if(!tier) return 0;
@@ -12,64 +14,26 @@ function getTierPoints(tier){
   return 0;
 }
 
-async function loadLeaderboard() {
-  const res = await fetch('data.json');
-  const data = await res.json();
-  window.leaderboardData = data.leaderboard;
-  document.getElementById("updated").textContent =
-    `Last updated: ${new Date(data.lastUpdated).toLocaleString()}`;
-  renderLeaderboard();
-}
-
 function getScore(player,type){
   if(type==='overall'){
     return ['uhc','pot','sword'].reduce((a,k)=>a+getTierPoints(player[k]),0);
   } else return getTierPoints(player[type]);
 }
 
-// Smooth rank-change: store previous order
-let previousOrder = [];
-
-function renderLeaderboard(){
-  const tbody = document.querySelector("#leaderboard tbody");
-  const type = currentTab;
-  const sorted = window.leaderboardData.slice().sort((a,b)=>getScore(b,type)-getScore(a,type));
-  const newOrder = sorted.map(p=>p.username);
-
-  tbody.innerHTML='';
-
-  sorted.forEach((p,index)=>{
-    const row = document.createElement('tr');
-
-    // Badges with hover tooltip
-    const badges = ['uhc','pot','sword'].map(k=>{
-      if(!p[k]) return '';
-      return `<span class="badge ${p[k].toLowerCase()}" title="${getTierPoints(p[k])} pts">${p[k]}</span>`;
-    }).join('');
-
-    row.innerHTML = `<td>${index+1}</td><td>${p.username} ${badges}</td><td>${getScore(p,type)}</td>`;
-
-    // Smooth rank-change animation
-    const prevIndex = previousOrder.indexOf(p.username);
-    if(prevIndex!==-1){
-      const diff = prevIndex - index;
-      if(diff!==0){
-        row.style.transform = `translateY(${diff*10}px)`;
-        requestAnimationFrame(()=>{
-          row.style.transition = 'transform 0.3s ease';
-          row.style.transform = 'translateY(0)';
-        });
-      }
-    }
-
-    row.addEventListener('click',()=>openPlayerModal(p));
-    tbody.appendChild(row);
-  });
-
-  previousOrder = newOrder;
+function getRankClass(index){
+  if(index===0) return 'rank1';
+  if(index===1) return 'rank2';
+  if(index===2) return 'rank3';
+  return '';
 }
 
-// Player modal
+async function loadLeaderboard(){
+  const res = await fetch('data.json');
+  const data = await res.json();
+  leaderboardData = data.leaderboard;
+  renderLeaderboard();
+}
+
 function openPlayerModal(player){
   document.getElementById('modal-name').textContent = player.username;
   document.getElementById('modal-discord').textContent = player.discordId?`Discord: ${player.discordId}`:'';
@@ -80,7 +44,6 @@ function openPlayerModal(player){
     el.title = `${getTierPoints(player[k]||'')} pts`;
   });
   document.getElementById('modal-score').textContent = getScore(player,'overall');
-
   document.getElementById('player-modal').classList.add('show');
 }
 
@@ -108,5 +71,56 @@ document.getElementById("search").addEventListener("input", e=>{
     else row.style.display='none';
   });
 });
+
+// Render leaderboard
+function renderLeaderboard(){
+  const tbody = document.querySelector("#leaderboard tbody");
+  const thead = document.getElementById("table-head");
+  tbody.innerHTML='';
+
+  if(currentTab==='overall'){
+    const sorted = leaderboardData.slice().sort((a,b)=>{
+      const diff = getScore(b,'overall') - getScore(a,'overall');
+      if(diff===0) return a.username.localeCompare(b.username);
+      return diff;
+    });
+
+    sorted.forEach((p,index)=>{
+      const row = document.createElement('tr');
+      const badges = ['uhc','pot','sword'].map(k=>{
+        if(!p[k]) return '';
+        return `<span class="badge ${p[k].toLowerCase()}" title="${getTierPoints(p[k])} pts">${p[k]}</span>`;
+      }).join('');
+      row.innerHTML = `<td class="${getRankClass(index)}">${index+1}</td><td>${p.username} ${badges}</td><td>${getScore(p,'overall')}</td>`;
+      row.addEventListener('click',()=>openPlayerModal(p));
+      tbody.appendChild(row);
+    });
+
+  } else {
+    const tiers = ['lt5','lt4','lt3','lt2','lt1','ht1'].reverse();
+
+    const headerRow = document.getElementById("table-header-row");
+    headerRow.innerHTML = `<th>Rank</th><th>Player</th>` + tiers.map(t=>`<th>${t.toUpperCase()}</th>`).join('');
+
+    const sorted = leaderboardData.slice().sort((a,b)=>{
+      const t = currentTab;
+      const diff = getTierPoints(b[t]) - getTierPoints(a[t]);
+      if(diff===0) return a.username.localeCompare(b.username);
+      return diff;
+    });
+
+    sorted.forEach((p,index)=>{
+      const row = document.createElement('tr');
+      const cells = tiers.map(t=>{
+        const points = getTierPoints(p[currentTab]);
+        if(t===p[currentTab].toLowerCase() || t==='lt'+p[currentTab].slice(2).toLowerCase()) return `<span class="badge ${p[currentTab].toLowerCase()}" title="${points} pts">${p[currentTab]}</span>`;
+        return '';
+      }).join('');
+      row.innerHTML = `<td>${index+1}</td><td>${p.username}</td>`+ `<td colspan="${tiers.length}">${cells}</td>`;
+      row.addEventListener('click',()=>openPlayerModal(p));
+      tbody.appendChild(row);
+    });
+  }
+}
 
 loadLeaderboard();
