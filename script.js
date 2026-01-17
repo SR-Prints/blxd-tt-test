@@ -13,29 +13,29 @@ async function loadLeaderboard() {
 function renderLeaderboard(leaderboard) {
   const tbody = document.querySelector("#leaderboard tbody");
 
-  // Calculate total score if needed
-  // Assuming leaderboard already has totalScore field
+  // For now, sort by total score or sum of tiers if needed later
+  // For demo, we just sort by the score property
   const sorted = leaderboard.slice().sort((a, b) => b.score - a.score);
   tbody.innerHTML = "";
 
   sorted.forEach((player, index) => {
     const row = document.createElement("tr");
 
-    // Rank badge based on tier
-    let badge = '';
-    if(index === 0) badge = '<span class="badge gold">G</span>';
-    else if(index === 1) badge = '<span class="badge silver">S</span>';
-    else if(index === 2) badge = '<span class="badge bronze">B</span>';
+    // Create badges for each PvP type
+    const badges = ['uhc','pot','sword'].map(type => {
+      if(!player[type]) return '';
+      return `<span class="badge ${player[type].toLowerCase()}">${player[type]}</span>`;
+    }).join('');
 
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${player.username} ${badge}</td>
+      <td>${player.username} ${badges}</td>
       <td>${player.score}</td>
     `;
 
     // Rank change animation
     const prevIndex = previousOrder.indexOf(player.username);
-    if(prevIndex !== -1) {
+    if(prevIndex !== -1){
       const diff = prevIndex - index;
       if(diff !== 0){
         row.style.transform = `translateY(${diff * 10}px)`;
