@@ -37,12 +37,11 @@ header p {
 /* ---- Controls ---- */
 .controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin: 1rem 0;
-  gap: 0.5rem;
 }
 
-#search, #season-select {
+#search {
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   border: 1px solid #444;
@@ -80,7 +79,6 @@ tbody tr {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   cursor: pointer;
   border-radius: 6px;
-  margin-bottom: 4px;
 }
 
 tbody tr:hover {
@@ -93,61 +91,24 @@ td:first-child {
   font-weight: 600;
 }
 
-/* ---- Top 3 Highlight ---- */
-tr.gold td { background: #ffd70022; }
-tr.silver td { background: #c0c0c022; }
-tr.bronze td { background: #cd7f3222; }
-
-/* ---- Modal ---- */
-#player-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+/* ---- Top 3 Badge Highlight ---- */
+td.badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 0.25rem;
 }
 
-#player-modal.hidden { display: none; }
+.gold { background: #ffd700; color: #111; }
+.silver { background: #c0c0c0; color: #111; }
+.bronze { background: #cd7f32; color: #111; }
 
-.modal-content {
-  background: #1c1c2b;
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  min-width: 300px;
-  max-width: 90%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-  position: relative;
-  animation: modalIn 0.2s ease-out;
+/* ---- Search Highlight ---- */
+tbody tr.highlight {
+  box-shadow: 0 0 15px rgba(88,101,242,0.8);
+  transform: translateY(-2px);
+  background: #2a2a3c;
 }
-
-@keyframes modalIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-#close-modal {
-  position: absolute;
-  right: 18px;
-  top: 14px;
-  font-size: 1.4rem;
-  cursor: pointer;
-  opacity: 0.7;
-}
-
-#close-modal:hover { opacity: 1; }
-
-/* ---- Modal Tabs ---- */
-.tabs {
-  display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
-  border-bottom: 1px solid #333;
-  justify-content: center;
-}
-
-.tab {
-  background: none;
-  border: none;
-  color: #aaa
