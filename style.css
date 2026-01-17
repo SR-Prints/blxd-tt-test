@@ -1,55 +1,186 @@
-* { box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; }
-body { margin: 0; background: #0b0e14; color: #e5e7eb; }
+/* ---- General Reset ---- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-.container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
-h1 { text-align: center; font-size: 32px; margin-bottom: 5px; }
-.subtitle { text-align: center; color: #9ca3af; margin-bottom: 20px; }
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(160deg, #10101c, #181828);
+  color: #eaeaea;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
 
-/* Tabs */
-.tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-.tab { padding: 10px 16px; background: #020617; border: 1px solid #1e293b; color: #9ca3af; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.2s; }
-.tab.active { background: #0f172a; color: #fff; border-color: #334155; }
-.tab:hover { color: #fff; }
+/* ---- Container ---- */
+.container {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
 
-/* Search */
-input { display: block; margin: 0 auto 20px; padding: 10px 12px; width: 100%; max-width: 320px; background: #111827; border: 1px solid #1f2937; color: #fff; border-radius: 6px; }
+/* ---- Header ---- */
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
 
-/* Table wrapper */
-.table-wrapper { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; overflow: hidden; }
+header p {
+  font-size: 0.85rem;
+  color: #aaa;
+}
 
-/* Table */
-table { width: 100%; border-collapse: separate; border-spacing: 0; }
-thead { background: #020617; border-bottom: 2px solid #334155; }
-th { padding: 14px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #9ca3af; }
-td { padding: 14px; border-top: 1px solid #1e293b; vertical-align: middle; transition: background 0.3s; border-radius: 8px; }
+/* ---- Controls ---- */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
 
-/* Row highlight for top 3 */
-tbody tr:nth-child(1) td { background: linear-gradient(90deg,#facc15,#f59e0b); color: #0b0e14; font-weight: bold; }
-tbody tr:nth-child(2) td { background: linear-gradient(90deg,#10b981,#047857); color: #fff; font-weight: bold; }
-tbody tr:nth-child(3) td { background: linear-gradient(90deg,#3b82f6,#1e40af); color: #fff; font-weight: bold; }
+#search, #season-select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1a1a2a;
+  color: white;
+  font-size: 0.9rem;
+}
 
-/* Hover animation */
-tbody tr:hover td { background: #020617; }
+/* ---- Leaderboard Card ---- */
+.leaderboard-card {
+  background: #1c1c2b;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
 
-/* Badges */
-.badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: bold; color: white; margin-right: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-.badge-LT5 { background: linear-gradient(45deg, #6b7280, #4b5563); }
-.badge-HT5 { background: linear-gradient(45deg, #f97316, #ea580c); }
-.badge-LT4 { background: linear-gradient(45deg, #9ca3af, #6b7280); }
-.badge-HT4 { background: linear-gradient(45deg, #ef4444, #dc2626); }
-.badge-LT3 { background: linear-gradient(45deg, #3b82f6, #2563eb); }
-.badge-HT3 { background: linear-gradient(45deg, #d946ef, #9333ea); }
-.badge-LT2 { background: linear-gradient(45deg, #10b981, #047857); }
-.badge-HT2 { background: linear-gradient(45deg, #8b5cf6, #5b21b6); }
-.badge-LT1 { background: linear-gradient(45deg, #facc15, #eab308); }
-.badge-HT1 { background: linear-gradient(45deg, #14b8a6, #0d9488); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-/* Points bold */
-td:last-child { font-weight: bold; }
+th, td {
+  padding: 0.75rem;
+  text-align: center;
+}
 
-/* Modal */
-.modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.75); }
-.modal-content { background-color: #0f172a; margin: 10% auto; padding: 20px; border: 1px solid #334155; width: 90%; max-width: 400px; border-radius: 12px; color: #e5e7eb; animation: fadeIn 0.3s ease; }
-.close { color: #9ca3af; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-.close:hover { color: #fff; }
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+th {
+  background: #22223a;
+  border-bottom: 2px solid #444;
+  font-weight: 600;
+}
+
+tbody tr {
+  background: #1c1c2b;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+tbody tr:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(88,101,242,0.5);
+  background: #2a2a3c;
+}
+
+td:first-child {
+  font-weight: 600;
+}
+
+/* ---- Top 3 Highlight ---- */
+tr.gold td { background: #ffd70022; }
+tr.silver td { background: #c0c0c022; }
+tr.bronze td { background: #cd7f3222; }
+
+/* ---- Modal ---- */
+#player-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#player-modal.hidden { display: none; }
+
+.modal-content {
+  background: #1c1c2b;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  min-width: 300px;
+  max-width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  animation: modalIn 0.2s ease-out;
+}
+
+@keyframes modalIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+#close-modal {
+  position: absolute;
+  right: 18px;
+  top: 14px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+#close-modal:hover { opacity: 1; }
+
+/* ---- Modal Tabs ---- */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  border-bottom: 1px solid #333;
+  justify-content: center;
+}
+
+.tab {
+  background: none;
+  border: none;
+  color: #aaa;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.tab.active {
+  color: white;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background: #5865f2;
+}
+
+.tab-content {
+  display: none;
+  text-align: left;
+}
+
+.tab-content.active { display: block; }
+
+/* ---- Highlight Search Result ---- */
+tbody tr.highlight {
+  box-shadow: 0 0 15px rgba(88,101,242,0.8);
+  transform: translateY(-2px);
+  background: #2a2a3c;
+}
