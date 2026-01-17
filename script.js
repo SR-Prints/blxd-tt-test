@@ -29,14 +29,17 @@ function getRankClass(index){
 
 // Load JSON
 async function loadLeaderboard(){
-  const res = await fetch('data.json');
-  const data = await res.json();
-  leaderboardData = data.leaderboard;
-  renderLeaderboard();
+  try{
+    const res = await fetch('data.json');
+    const data = await res.json();
+    leaderboardData = data.leaderboard;
+    renderLeaderboard();
+  }catch(e){ console.error("Failed to load leaderboard data", e); }
 }
 
 // Modal
 function openPlayerModal(player){
+  const modal = document.getElementById('player-modal');
   document.getElementById('modal-name').textContent = player.username;
   document.getElementById('modal-discord').textContent = player.discordId?`Discord: ${player.discordId}`:'';
   ['uhc','pot','sword'].forEach(k=>{
@@ -46,7 +49,7 @@ function openPlayerModal(player){
     el.title = `${getTierPoints(player[k]||'')} pts`;
   });
   document.getElementById('modal-score').textContent = getScore(player,'overall');
-  document.getElementById('player-modal').classList.add('show');
+  modal.classList.add('show');
 }
 
 // Close modal
@@ -68,9 +71,13 @@ document.getElementById("search").addEventListener("input", e=>{
   const value = e.target.value.toLowerCase();
   document.querySelectorAll("#leaderboard tbody tr").forEach(row=>{
     const name = row.children[1].textContent.toLowerCase();
-    if(name.includes(value) && value){ row.classList.add("highlight"); row.style.display=''; }
-    else if(!value){ row.classList.remove("highlight"); row.style.display=''; }
-    else row.style.display='none';
+    if(name.includes(value) && value){ 
+      row.classList.add("highlight"); 
+      row.style.display=''; 
+    } else if(!value){ 
+      row.classList.remove("highlight"); 
+      row.style.display=''; 
+    } else row.style.display='none';
   });
 });
 
@@ -98,18 +105,21 @@ function renderLeaderboard(){
       tbody.appendChild(row);
     });
   } else {
-    // Category tabs: dynamic tier columns
-    const tiers = ['lt5','lt4','lt3','lt2','lt1','ht1'].reverse();
-    thead.querySelector("#table-header-row").innerHTML = '<th>Rank</th><th>Player</th>' + tiers.map(t=>`<th>${t.toUpperCase()}</th>`).join('');
-    const sorted = leaderboardData.slice().sort((a,b)=>{
+    // Category tabs: tier columns
+    const tiers = ['T5','T4','T3','T2','T1'].reverse();
+    thead.querySelector("#table-header-row").innerHTML = '<th>Rank</th><th>Player</th>' + tiers.map(t=>`<th>${t}</th>`).join('');
+    
+    let sortedPlayers = leaderboardData.slice().sort((a,b)=>{
       const diff = getScore(b,currentTab)-getScore(a,currentTab);
       if(diff===0) return a.username.localeCompare(b.username);
       return diff;
     });
-    sorted.forEach((p,index)=>{
+
+    sortedPlayers.forEach((p,index)=>{
       const cells = tiers.map(t=>{
         if(!p[currentTab]) return '';
-        if(p[currentTab].toLowerCase().endsWith(t.slice(2))) return `<span class="badge ${p[currentTab].toLowerCase()}" title="${getTierPoints(p[currentTab])} pts">${p[currentTab]}</span>`;
+        const tierLetter = p[currentTab].toUpperCase()[0];
+        if(tierLetter+t.slice(1)===t) return `<span class="badge ${p[currentTab].toLowerCase()}" title="${getTierPoints(p[currentTab])} pts">${p[currentTab]}</span>`;
         return '';
       }).join('');
       const row = document.createElement('tr');
@@ -117,7 +127,16 @@ function renderLeaderboard(){
       row.addEventListener('click',()=>openPlayerModal(p));
       tbody.appendChild(row);
     });
+
+    // Animate top 3 highlight per column
+    tiers.forEach((t,colIndex)=>{
+      let colCells = Array.from(tbody.querySelectorAll(`tr td:nth-child(${colIndex+3})`));
+      colCells.slice(0,3).forEach((cell,i)=>{
+        cell.classList.add(getRankClass(i));
+      });
+    });
   }
 }
 
+// Load on start
 loadLeaderboard();
