@@ -1,11 +1,10 @@
 {
-  "lastUpdated": "2026-01-16T00:00:00Z",
   "leaderboard": [
     {
       "discordId": "123456",
       "username": "PlayerOne",
       "uhc": "HT1",
-      "pot": "LT3",
+      "pot": "",
       "sword": "LT2"
     },
     {
@@ -13,7 +12,7 @@
       "username": "PlayerTwo",
       "uhc": "LT1",
       "pot": "LT2",
-      "sword": "LT1"
+      "sword": ""
     },
     {
       "discordId": "246810",
