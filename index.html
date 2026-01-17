@@ -14,6 +14,22 @@
     <p id="updated"></p>
   </header>
 
+  <!-- PvP Tabs -->
+  <div class="tabs leaderboard-tabs">
+    <button class="tab active" data-tab="overall">
+      <img src="icons/overall.png" alt="Overall" class="tab-icon"> Overall
+    </button>
+    <button class="tab" data-tab="uhc">
+      <img src="icons/uhc.png" alt="UHC" class="tab-icon"> UHC
+    </button>
+    <button class="tab" data-tab="pot">
+      <img src="icons/pot.png" alt="Pot" class="tab-icon"> Pot
+    </button>
+    <button class="tab" data-tab="sword">
+      <img src="icons/sword.png" alt="Sword" class="tab-icon"> Sword
+    </button>
+  </div>
+
   <div class="controls">
     <input id="search" type="text" placeholder="Search player..." />
   </div>
@@ -31,6 +47,21 @@
     </table>
   </div>
 
+</div>
+
+<!-- Player Modal -->
+<div id="player-modal" class="hidden">
+  <div class="modal-content">
+    <span id="close-modal">×</span>
+    <h2 id="modal-name"></h2>
+    <p id="modal-discord"></p>
+    <div class="player-badges">
+      <span><strong>UHC:</strong> <span id="modal-uhc" class="badge"></span></span>
+      <span><strong>Pot:</strong> <span id="modal-pot" class="badge"></span></span>
+      <span><strong>Sword:</strong> <span id="modal-sword" class="badge"></span></span>
+    </div>
+    <p><strong>Total Score:</strong> <span id="modal-score"></span></p>
+  </div>
 </div>
 
 <script src="script.js"></script>
