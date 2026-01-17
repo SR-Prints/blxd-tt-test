@@ -1,6 +1,7 @@
 let currentTab = 'overall';
 let leaderboardData = [];
 
+// Tier points mapping
 function getTierPoints(tier){
   if(!tier) return 0;
   const t = tier.toLowerCase();
@@ -26,6 +27,7 @@ function getRankClass(index){
   return '';
 }
 
+// Load JSON
 async function loadLeaderboard(){
   const res = await fetch('data.json');
   const data = await res.json();
@@ -33,6 +35,7 @@ async function loadLeaderboard(){
   renderLeaderboard();
 }
 
+// Modal
 function openPlayerModal(player){
   document.getElementById('modal-name').textContent = player.username;
   document.getElementById('modal-discord').textContent = player.discordId?`Discord: ${player.discordId}`:'';
@@ -46,6 +49,7 @@ function openPlayerModal(player){
   document.getElementById('player-modal').classList.add('show');
 }
 
+// Close modal
 document.getElementById('close-modal').onclick = ()=> document.getElementById('player-modal').classList.remove('show');
 document.getElementById('player-modal').onclick = e=>{if(e.target.id==='player-modal') e.target.classList.remove('show');};
 
@@ -70,6 +74,7 @@ document.getElementById("search").addEventListener("input", e=>{
   });
 });
 
+// Render leaderboard
 function renderLeaderboard(){
   const tbody = document.querySelector("#leaderboard tbody");
   const thead = document.getElementById("table-head");
@@ -93,7 +98,7 @@ function renderLeaderboard(){
       tbody.appendChild(row);
     });
   } else {
-    // Category tabs
+    // Category tabs: dynamic tier columns
     const tiers = ['lt5','lt4','lt3','lt2','lt1','ht1'].reverse();
     thead.querySelector("#table-header-row").innerHTML = '<th>Rank</th><th>Player</th>' + tiers.map(t=>`<th>${t.toUpperCase()}</th>`).join('');
     const sorted = leaderboardData.slice().sort((a,b)=>{
@@ -103,9 +108,9 @@ function renderLeaderboard(){
     });
     sorted.forEach((p,index)=>{
       const cells = tiers.map(t=>{
-        if(p[currentTab] && (p[currentTab].toLowerCase()===t || t==='lt'+p[currentTab].slice(2).toLowerCase())) {
-          return `<span class="badge ${p[currentTab].toLowerCase()}" title="${getTierPoints(p[currentTab])} pts">${p[currentTab]}</span>`;
-        } else return '';
+        if(!p[currentTab]) return '';
+        if(p[currentTab].toLowerCase().endsWith(t.slice(2))) return `<span class="badge ${p[currentTab].toLowerCase()}" title="${getTierPoints(p[currentTab])} pts">${p[currentTab]}</span>`;
+        return '';
       }).join('');
       const row = document.createElement('tr');
       row.innerHTML = `<td>${index+1}</td><td>${p.username}</td>${cells}`;
