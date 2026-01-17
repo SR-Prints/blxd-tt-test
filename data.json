@@ -1,14 +1,8 @@
 {
-  "uhc": [
-    { "player": "BloxdKing", "rank": "HT1", "discord": "123456789012345678" },
-    { "player": "SharpBlade", "rank": "LT5" }
-  ],
-  "sword": [
-    { "player": "PvP_Master", "rank": "HT2", "discord": "987654321098765432" },
-    { "player": "VoidHunter", "rank": "LT3" }
-  ],
-  "pot": [
-    { "player": "NightPvPer", "rank": "HT2" },
-    { "player": "BloxdKing", "rank": "HT3", "discord": "123456789012345678" }
+  "lastUpdated": "2026-01-16T00:00:00Z",
+  "leaderboard": [
+    { "discordId": "1", "username": "PlayerOne", "score": 5000, "history":[{"score":4800,"date":"2026-01-10"},{"score":5000,"date":"2026-01-15"}] },
+    { "discordId": "2", "username": "PlayerTwo", "score": 4800, "history":[{"score":4700,"date":"2026-01-11"},{"score":4800,"date":"2026-01-15"}] },
+    { "discordId": "3", "username": "PlayerThree", "score": 4600, "history":[{"score":4500,"date":"2026-01-12"},{"score":4600,"date":"2026-01-15"}] }
   ]
 }
