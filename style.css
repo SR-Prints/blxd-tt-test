@@ -150,37 +150,4 @@ tr.bronze td { background: #cd7f3222; }
 .tab {
   background: none;
   border: none;
-  color: #aaa;
-  padding: 0.5rem 0;
-  cursor: pointer;
-  position: relative;
-  font-size: 0.9rem;
-}
-
-.tab.active {
-  color: white;
-}
-
-.tab.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 2px;
-  background: #5865f2;
-}
-
-.tab-content {
-  display: none;
-  text-align: left;
-}
-
-.tab-content.active { display: block; }
-
-/* ---- Highlight Search Result ---- */
-tbody tr.highlight {
-  box-shadow: 0 0 15px rgba(88,101,242,0.8);
-  transform: translateY(-2px);
-  background: #2a2a3c;
-}
+  color: #aaa
