@@ -4,22 +4,8 @@ async function loadLeaderboard() {
   const res = await fetch("data.json");
   const data = await res.json();
 
-  // Populate seasons
-  const seasonSelect = document.getElementById("season-select");
-  Object.entries(data.seasons).forEach(([key, season]) => {
-    const opt = document.createElement("option");
-    opt.value = key;
-    opt.textContent = season.label;
-    seasonSelect.appendChild(opt);
-  });
+  renderLeaderboard(data.leaderboard);
 
-  seasonSelect.onchange = () => {
-    renderLeaderboard(data.seasons[seasonSelect.value].leaderboard);
-  };
-
-  renderLeaderboard(data.seasons[seasonSelect.value].leaderboard);
-
-  // Last updated
   document.getElementById("updated").textContent =
     `Last updated: ${new Date(data.lastUpdated).toLocaleString()}`;
 }
