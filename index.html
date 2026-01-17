@@ -1,52 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Bloxd.io PvP Rankings</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Bloxd.io Leaderboard</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
-  <h1>Bloxd.io PvP Rankings</h1>
-  <p class="subtitle">Community PvP Leaderboard</p>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab active" data-mode="overall">Overall</button>
-    <button class="tab" data-mode="uhc">UHC</button>
-    <button class="tab" data-mode="sword">Sword</button>
-    <button class="tab" data-mode="pot">Pot</button>
+  <header>
+    <h1>Bloxd.io Leaderboard</h1>
+    <p id="updated"></p>
+  </header>
+
+  <div class="controls">
+    <select id="season-select"></select>
+    <input id="search" type="text" placeholder="Search player..." />
   </div>
 
-  <!-- Search -->
-  <input id="search" type="text" placeholder="Search player">
-
-  <!-- Table -->
-  <div class="table-wrapper">
-    <table>
+  <div class="leaderboard-card">
+    <table id="leaderboard">
       <thead>
         <tr>
-          <th>#</th>
+          <th>Rank</th>
           <th>Player</th>
-          <th>Rank / Badges</th>
-          <th>Points</th>
+          <th>Score</th>
         </tr>
       </thead>
-      <tbody id="rows"></tbody>
+      <tbody></tbody>
     </table>
   </div>
+
 </div>
 
-<!-- Modal for player info -->
-<div id="playerModal" class="modal">
+<!-- Player Modal -->
+<div id="player-modal" class="hidden">
   <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 id="modalName"></h2>
-    <p id="modalDiscord"></p>
-    <p id="modalRanks"></p>
+    <span id="close-modal">×</span>
+
+    <h2 id="modal-name"></h2>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="overview">Overview</button>
+      <button class="tab" data-tab="history">History</button>
+    </div>
+
+    <div class="tab-content active" id="overview">
+      <p><strong>Rank:</strong> <span id="modal-rank"></span></p>
+      <p><strong>Score:</strong> <span id="modal-score"></span></p>
+    </div>
+
+    <div class="tab-content" id="history">
+      <ul id="history-list"></ul>
+    </div>
   </div>
 </div>
 
