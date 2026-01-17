@@ -8,14 +8,14 @@
 </head>
 <body>
 
-<!-- Floating top bar -->
+<!-- Floating Topbar -->
 <div class="topbar">
   <h1>Bloxd.io Leaderboard</h1>
 </div>
 
 <div class="container">
 
-  <!-- Tabs for Overall / UHC / Pot / Sword -->
+  <!-- Tabs -->
   <div class="tabs leaderboard-tabs">
     <button class="tab active" data-tab="overall">
       <img src="icons/overall.png" alt="Overall" class="tab-icon"> Overall
@@ -31,14 +31,15 @@
     </button>
   </div>
 
-  <!-- Search box -->
+  <!-- Search -->
   <div class="controls">
     <input id="search" type="text" placeholder="Search player..." />
   </div>
 
-  <!-- Leaderboard Table -->
+  <!-- Leaderboard Table / Columns -->
   <div class="leaderboard-card">
-    <table id="leaderboard">
+    <div id="leaderboard-columns" class="columns-layout"></div>
+    <table id="leaderboard" class="hidden">
       <thead id="table-head">
         <tr id="table-header-row">
           <th>Rank</th>
